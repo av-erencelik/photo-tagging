@@ -5,18 +5,7 @@ import main from "../img/main.jpg";
 import target from "../img/target.png";
 import { useEffect, useRef, useState } from "react";
 import db from "./firebase";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  limit,
-  orderBy,
-  query,
-  setDoc,
-} from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query } from "firebase/firestore";
 
 export default function Game() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,10 +16,13 @@ export default function Game() {
   const [isMeatFound, setIsMeatFound] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [timer, setTimer] = useState(0);
+  const [name, setName] = useState("");
+  const [time, setTime] = useState(0);
+  const [leaderboard, setLeaderboard] = useState([]);
   const imgRef = useRef();
   useEffect(() => {
     if (isDukeFound && isTommyFound && isMeatFound) {
-      sendLeaderboard(timer);
+      setTime(timer);
       setIsGameOver(true);
     }
   }, [isDukeFound, isTommyFound, isMeatFound]);
@@ -59,14 +51,14 @@ export default function Game() {
     setClickledY(relY);
     setIsModalOpen(true);
   }
-  async function sendLeaderboard(time) {
-    // const leaderboardRef = await addDoc(collection(db, "leaderboard"), {
-    //   name: "sali",
-    //   time: time,
-    // });
-    const q = query(collection(db, "leaderboard"), orderBy("time", "desc"), limit(5));
+  async function sendLeaderboard() {
+    const leaderboardRef = await addDoc(collection(db, "leaderboard"), {
+      name: name,
+      time: time,
+    });
+    const q = query(collection(db, "leaderboard"), orderBy("time"), limit(5));
     getDocs(q).then((qsnap) => {
-      console.log(qsnap.docs.map((d) => ({ ...d.data() })));
+      setLeaderboard(qsnap.docs.map((d) => ({ ...d.data() })));
     });
   }
   async function handleCharacterChoice(e) {
@@ -103,8 +95,39 @@ export default function Game() {
       setIsTommyFound(true);
     }
   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    sendLeaderboard();
+    setIsGameOver(false);
+    setIsDukeFound(false);
+    setIsMeatFound(false);
+    setIsTommyFound(false);
+  }
+  function onChangeName(e) {
+    setName(e.target.value);
+  }
   return (
     <main className="main">
+      {isGameOver && (
+        <form className="form" onSubmit={handleSubmit}>
+          <label id="name">NAME:</label>
+          <input className="name" type="text" id="name" onChange={onChangeName}></input>
+          <button type="submit">Submit</button>
+        </form>
+      )}
+
+      <div className="leaderboard">
+        <h3 className="title">LEADERBOARD</h3>
+        {leaderboard.map((data) => {
+          return (
+            <div key={leaderboard.indexOf(data)} className="person">
+              <h3>{data.name}</h3>
+              <h3>{new Date(data.time * 1000).toISOString().substr(11, 8)}</h3>
+            </div>
+          );
+        })}
+      </div>
+
       <div className="timer">{new Date(timer * 1000).toISOString().substr(11, 8)}</div>
       <div className="characters">
         <div className={isDukeFound ? "container found" : "container"}>

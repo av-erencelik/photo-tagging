@@ -63,3 +63,45 @@
   text-align: center;
   font-size: 2rem;
 }
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 230px;
+  height: 100px;
+  background-color: $black;
+  padding: 1rem;
+  label {
+    color: $grey;
+    display: block;
+  }
+  button {
+    display: block;
+    width: 220px;
+    margin-top: 1rem;
+    background-color: $grey;
+    color: $black;
+    border: none;
+    padding: 0.5rem;
+  }
+  input {
+    width: 200px;
+    padding: 0.5rem;
+  }
+}
+.leaderboard {
+  color: $grey;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: auto;
+  .person {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.title {
+  text-align: center;
+}
