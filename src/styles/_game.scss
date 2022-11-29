@@ -1,6 +1,6 @@
 .main {
   background-color: $black;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   .characters {
     display: flex;
     justify-content: center;
@@ -19,6 +19,38 @@
         font-weight: 400;
         padding-left: 30px;
         font-size: 1.5rem;
+      }
+    }
+  }
+}
+.game-container {
+  position: relative;
+  .game {
+    width: 100%;
+    height: auto;
+    cursor: url("../img/target.png"), pointer;
+  }
+}
+.onclick {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  .modal {
+    display: flex;
+    flex-direction: column;
+
+    .choice {
+      border: none;
+      outline: none;
+      background-color: $grey;
+      color: $white;
+      border: 1px solid $white;
+      padding: 2px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+      &:hover {
+        background-color: $black;
       }
     }
   }
