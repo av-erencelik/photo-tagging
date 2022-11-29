@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/photo-tagging/static/css/main.0c712b24.css",
+    "main.js": "/photo-tagging/static/js/main.1cd5c7b1.js",
+    "static/media/main.jpg": "/photo-tagging/static/media/main.9edf6cabf31f393b72c4.jpg",
+    "static/media/dukeNukem.png": "/photo-tagging/static/media/dukeNukem.4378ab68d27a8f698e96.png",
+    "static/media/tommy.png": "/photo-tagging/static/media/tommy.ab2049c632e115d2295a.png",
+    "static/media/meatBoy.png": "/photo-tagging/static/media/meatBoy.a7f45392cc97dd56977e.png",
+    "index.html": "/photo-tagging/index.html",
+    "main.0c712b24.css.map": "/photo-tagging/static/css/main.0c712b24.css.map",
+    "main.1cd5c7b1.js.map": "/photo-tagging/static/js/main.1cd5c7b1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0c712b24.css",
+    "static/js/main.1cd5c7b1.js"
+  ]
+}
