@@ -1,0 +1,25 @@
+.main {
+  background-color: $black;
+  height: calc(100vh - 60px);
+  .characters {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-bottom: 2px solid $grey;
+    .container {
+      display: flex;
+      img {
+        height: 200px;
+      }
+      .description {
+        color: $white;
+        align-self: center;
+        font-weight: 400;
+        padding-left: 30px;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
